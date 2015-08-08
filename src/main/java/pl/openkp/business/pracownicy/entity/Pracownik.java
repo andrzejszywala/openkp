@@ -21,6 +21,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -40,6 +42,9 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import pl.openkp.business.absencje.entity.Absencja;
 import pl.openkp.business.walidacja.Email;
+import pl.openkp.business.walidacja.Iban;
+import pl.openkp.business.walidacja.Nip;
+import pl.openkp.business.walidacja.Pesel;
 
 @NamedQueries({ @NamedQuery(name = "Pracownik.PRACOWNICY", query = "SELECT DISTINCT p FROM Pracownik p LEFT JOIN FETCH p.absencje ORDER BY p.id") })
 @Entity
@@ -61,6 +66,23 @@ public class Pracownik implements Serializable {
     private String imie;
     @NotNull(message = "Nazwisko pracownika jest wymagane")
     private String nazwisko;
+    private String imie2;
+    private String imieMatki;
+    private String imieOjca;
+    private String nazwiskoRodowe;
+    private String obywatelstwo;
+    @Temporal(TemporalType.DATE)
+    private Date dataUrodzenia;
+    private String miejsceUrodzenia;
+    @Enumerated(EnumType.STRING)
+    private Plec plec;
+    @Pesel(message = "Numer PESEL jest niepoprawny")
+    private String pesel;
+    @Nip(message = "Numer NIP jest niepoprawny")
+    private String nip;
+    private Identyfikator identyfikatorZUS;
+    @Iban(message = "Numer Iban jest niepoprawny")
+    private String numerKonta;
     @Email(message = "Niepoprawny adres email")
     private String email;
     private String telefon;
@@ -175,6 +197,102 @@ public class Pracownik implements Serializable {
 
     public void setAbsencje(List<Absencja> absencje) {
         this.absencje = absencje;
+    }
+
+    public String getImie2() {
+        return imie2;
+    }
+
+    public void setImie2(String imie2) {
+        this.imie2 = imie2;
+    }
+
+    public String getImieMatki() {
+        return imieMatki;
+    }
+
+    public void setImieMatki(String imieMatki) {
+        this.imieMatki = imieMatki;
+    }
+
+    public String getImieOjca() {
+        return imieOjca;
+    }
+
+    public void setImieOjca(String imieOjca) {
+        this.imieOjca = imieOjca;
+    }
+
+    public String getNazwiskoRodowe() {
+        return nazwiskoRodowe;
+    }
+
+    public void setNazwiskoRodowe(String nazwiskoRodowe) {
+        this.nazwiskoRodowe = nazwiskoRodowe;
+    }
+
+    public String getObywatelstwo() {
+        return obywatelstwo;
+    }
+
+    public void setObywatelstwo(String obywatelstwo) {
+        this.obywatelstwo = obywatelstwo;
+    }
+
+    public Date getDataUrodzenia() {
+        return dataUrodzenia;
+    }
+
+    public void setDataUrodzenia(Date dataUrodzenia) {
+        this.dataUrodzenia = dataUrodzenia;
+    }
+
+    public String getMiejsceUrodzenia() {
+        return miejsceUrodzenia;
+    }
+
+    public void setMiejsceUrodzenia(String miejsceUrodzenia) {
+        this.miejsceUrodzenia = miejsceUrodzenia;
+    }
+
+    public Plec getPlec() {
+        return plec;
+    }
+
+    public void setPlec(Plec plec) {
+        this.plec = plec;
+    }
+
+    public String getPesel() {
+        return pesel;
+    }
+
+    public void setPesel(String pesel) {
+        this.pesel = pesel;
+    }
+
+    public String getNip() {
+        return nip;
+    }
+
+    public void setNip(String nip) {
+        this.nip = nip;
+    }
+
+    public Identyfikator getIdentyfikatorZUS() {
+        return identyfikatorZUS;
+    }
+
+    public void setIdentyfikatorZUS(Identyfikator identyfikatorZUS) {
+        this.identyfikatorZUS = identyfikatorZUS;
+    }
+
+    public String getNumerKonta() {
+        return numerKonta;
+    }
+
+    public void setNumerKonta(String numerKonta) {
+        this.numerKonta = numerKonta;
     }
 
 }

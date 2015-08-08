@@ -1,12 +1,11 @@
 'use strict';
 
-angular.module('openkp.pracownicy', [ 'ngRoute' ]).config([ '$routeProvider', function($routeProvider) {
+angular.module('openkp.pracownicy', [ 'ngRoute', 'ui.grid' ]).config([ '$routeProvider', function($routeProvider) {
 	$routeProvider.when('/pracownicy', {
 		templateUrl : 'presentation/kadry/pracownicy/pracownicy.html',
 		controller : 'PracownicyController'
 	});
 } ]).controller('PracownicyController', function($scope, $http, $location, $log, PracownikResource, AbsencjaResource, uiGridConstants) {
-
 	$scope.$location = $location;
 	$scope.$log = $log;
 	$scope.gridOptions = {
@@ -19,7 +18,8 @@ angular.module('openkp.pracownicy', [ 'ngRoute' ]).config([ '$routeProvider', fu
 			$scope.gridApi = gridApi;
 		},
 		columnDefs : [ {
-			field : 'id',
+			displayName : 'Numer',
+			field : 'id'
 		}, {
 			field : 'imie',
 			displayName : 'Imię'

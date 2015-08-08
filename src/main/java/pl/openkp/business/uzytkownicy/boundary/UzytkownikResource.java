@@ -1,9 +1,6 @@
 package pl.openkp.business.uzytkownicy.boundary;
 
-import java.util.logging.Logger;
-
 import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
@@ -18,21 +15,17 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriBuilder;
 
-import pl.openkp.business.uzytkownicy.control.ZapiszProfilValidator;
 import pl.openkp.business.uzytkownicy.entity.Uzytkownik;
 
 @Stateless
 @Path("/profil")
 public class UzytkownikResource {
 
-    private static final Logger LOG = Logger.getLogger(UzytkownikResource.class.getName());
-
     @PersistenceContext(unitName = "openkp-persistence-unit")
     private EntityManager em;
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Interceptors({ ZapiszProfilValidator.class })
     public Response zapisz(Uzytkownik entity) {
         if (entity.getId() != null) {
             entity = em.merge(entity);
@@ -57,11 +50,11 @@ public class UzytkownikResource {
     @Path("/{id:[0-9][0-9]*}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response uzytkownik(@PathParam("id") Long id) {
-        Uzytkownik Uzytkownik = em.find(Uzytkownik.class, id);
-        if (Uzytkownik == null) {
+        Uzytkownik uzytkownik = em.find(Uzytkownik.class, id);
+        if (uzytkownik == null) {
             return Response.status(Status.NOT_FOUND).build();
         }
-        return Response.ok(Uzytkownik).build();
+        return Response.ok(uzytkownik).build();
     }
 
 }

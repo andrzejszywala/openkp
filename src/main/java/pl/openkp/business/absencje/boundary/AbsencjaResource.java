@@ -16,7 +16,6 @@ package pl.openkp.business.absencje.boundary;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.json.Json;
@@ -41,8 +40,6 @@ import pl.openkp.business.pracownicy.entity.Pracownik;
 @Stateless
 @Path("/absencja")
 public class AbsencjaResource {
-
-    private static final Logger LOG = Logger.getLogger(AbsencjaResource.class.getName());
 
     @PersistenceContext(unitName = "openkp-persistence-unit")
     private EntityManager em;
